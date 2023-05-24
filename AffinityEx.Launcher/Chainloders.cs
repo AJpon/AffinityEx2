@@ -10,9 +10,9 @@ namespace AffinityEx.Launcher {
 
     public static class ChainloaderStage1 {
 
-        public static void Run(string appName) {
+        public static void Run(string appName, ushort appVersion = 2) {
             Log.Information("{Stage} - Setting up assembly resolve", "Stage 1");
-            var resolver = AppAssemblyResolver.GetForApplication(appName);
+            var resolver = AppAssemblyResolver.GetForApplication(appName, appVersion);
             AppDomain.CurrentDomain.AssemblyResolve += resolver.HandleAssemblyResolve;
             ChainloaderStage2.Run(resolver, appName);
         }

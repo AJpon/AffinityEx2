@@ -32,9 +32,10 @@ namespace AffinityEx {
             }
         }
 
-        public static AppAssemblyResolver GetForApplication(string appName) {
-            var path = (string) Registry.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Serif\Affinity\{appName}\1", appName + " Install Path", null);
-            if (path == null) {
+        public static AppAssemblyResolver GetForApplication(string appName,ushort appVersion=2) {
+            var path = (string) Registry.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Serif\Affinity\{appName}\" + appVersion, appName + " Install Path", null);
+            if (path == null)
+            {
                 throw new ArgumentException("Unable to find Affinity install path");
             }
             Log.Information("{AppName} is installed in '{InstallPath}'", appName, path);
